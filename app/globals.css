@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* GitLab Light Mode Colors */
+  --gl-gray-50: #fafafa;
+  --gl-gray-100: #f4f4f4;
+  --gl-gray-200: #e5e5e5;
+  --gl-gray-300: #d4d4d4;
+  --gl-gray-400: #a8a8a8;
+  --gl-gray-500: #737373;
+  --gl-gray-600: #525252;
+  --gl-gray-700: #404040;
+  --gl-gray-800: #262626;
+  --gl-gray-900: #171717;
+  
+  --gl-blue-50: #eff6ff;
+  --gl-blue-100: #dbeafe;
+  --gl-blue-500: #3b82f6;
+  --gl-blue-600: #2563eb;
+  --gl-blue-700: #1d4ed8;
+  
+  --gl-green-500: #10b981;
+  --gl-green-600: #059669;
+  --gl-red-500: #ef4444;
+  --gl-red-600: #dc2626;
+  --gl-yellow-400: #facc15;
+  --gl-yellow-500: #eab308;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--gl-gray-50);
+  color: var(--gl-gray-900);
+  line-height: 1.5;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* GitLab-style card */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--gl-gray-200);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* GitLab-style button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--gl-blue-600);
+  color: white;
+  border-color: var(--gl-blue-600);
+}
+
+.btn-primary:hover {
+  background-color: var(--gl-blue-700);
+  border-color: var(--gl-blue-700);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--gl-gray-700);
+  border-color: var(--gl-gray-300);
+}
+
+.btn-secondary:hover {
+  background-color: var(--gl-gray-50);
+  border-color: var(--gl-gray-400);
+}
