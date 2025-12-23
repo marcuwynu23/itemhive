@@ -17,6 +17,13 @@ export default function Navbar() {
     }
   }
 
+  const handleSignOut = async () => {
+    await signOut({ 
+      callbackUrl: '/auth/login',
+      redirect: true 
+    })
+  }
+
   return (
     <nav className="h-16 bg-white border-b border-gray-200 flex items-center px-6 shadow-sm">
       <div className="flex items-center justify-between w-full">
@@ -48,7 +55,7 @@ export default function Navbar() {
                       Profile
                     </Link>
                     <button
-                      onClick={() => signOut({ callbackUrl: '/auth/login' })}
+                      onClick={handleSignOut}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Sign Out
@@ -70,4 +77,3 @@ export default function Navbar() {
     </nav>
   )
 }
-
