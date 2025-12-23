@@ -1,6 +1,8 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 
@@ -10,10 +12,36 @@ export default function ConditionalLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const router = useRouter()
+  const { data: session, status } = useSession()
   const isAuthPage = pathname?.startsWith('/auth')
+
+  useEffect(() => {
+    // Redirect to login if not authenticated and not on auth page
+    if (status === 'unauthenticated' && !isAuthPage) {
+      router.push('/auth/login')
+    }
+  }, [status, isAuthPage, router])
 
   if (isAuthPage) {
     return <>{children}</>
+  }
+
+  // Show loading state while checking session
+  if (status === 'loading') {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+          <p className="mt-4 text-sm text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Don't render protected content if not authenticated
+  if (status === 'unauthenticated') {
+    return null
   }
 
   return (
@@ -36,4 +64,3 @@ export default function ConditionalLayout({
     </div>
   )
 }
-
