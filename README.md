@@ -1,6 +1,6 @@
 # ItemHive
 
-A complete, full-featured inventory management system built with Next.js, TypeScript, Mongoose, and MongoDB. ItemHive provides comprehensive inventory tracking, financial management, and dynamic category management.
+A inventory management system provides comprehensive inventory tracking, financial management, and dynamic category management.
 
 ## Features
 
