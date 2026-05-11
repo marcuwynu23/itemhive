@@ -1,0 +1,103 @@
+# =============================================================================
+# ItemHive Docker Compose Configuration
+# =============================================================================
+# Complete development and production setup with MongoDB
+
+version: '3.8'
+
+services:
+  # =============================================================================
+  # MongoDB Database Service
+  # =============================================================================
+  mongodb:
+    image: mongo:7.0
+    container_name: itemhive-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: itemhive
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - itemhive-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # =============================================================================
+  # ItemHive Application Service
+  # =============================================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: itemhive-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=mongodb://admin:password123@mongodb:27017/itemhive?authSource=admin
+      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/itemhive?authSource=admin
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - NEXT_TELEMETRY_DISABLED=1
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - itemhive-network
+    volumes:
+      - ./uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # =============================================================================
+  # MongoDB Admin Interface (Optional)
+  # =============================================================================
+  mongo-express:
+    image: mongo-express:1.0.0
+    container_name: itemhive-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - itemhive-network
+    profiles:
+      - admin
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  itemhive-network:
+    driver: bridge
+    name: itemhive-network
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  mongodb_data:
+    driver: local
+    name: itemhive-mongodb-data
