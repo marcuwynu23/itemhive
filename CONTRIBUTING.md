@@ -93,6 +93,67 @@ inventory/
 
 ## Database Schema
 
+### Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    User {
+        ObjectId _id PK
+        string email UK "required, unique"
+        string name "optional"
+        string password "required, hashed"
+        string role "default: user"
+        Date createdAt
+        Date updatedAt
+    }
+
+    Category {
+        ObjectId _id PK
+        string name UK "required, unique"
+        Date createdAt
+        Date updatedAt
+    }
+
+    Item {
+        ObjectId _id PK
+        string name "required"
+        ObjectId categoryId FK "required, ref Category"
+        number quantity "default: 0, min: 0"
+        number price "default: 0, min: 0"
+        Date createdAt
+        Date updatedAt
+    }
+
+    Transaction {
+        ObjectId _id PK
+        string type "enum: income, expense"
+        number amount "required, min: 0"
+        string description "optional"
+        ObjectId itemId FK "optional, ref Item"
+        Date createdAt
+        Date updatedAt
+    }
+
+    Settings {
+        ObjectId _id PK
+        string key UK "required, unique"
+        string value "required, JSON string"
+        boolean financialTrackingEnabled "default: true"
+        Date createdAt
+        Date updatedAt
+    }
+
+    %% Relationships
+    Category ||--o{ Item : "contains"
+    Item ||--o{ Transaction : "references"
+
+    %% Notes
+    %% - User model exists for future multi-user support
+    %% - Category deletion cascades to Items (handled in API)
+    %% - Transaction.itemId is optional for general income/expense
+    %% - Settings stores configuration as key-value pairs
+```
+
 ### Models
 
 - **User**: User accounts (for future authentication)
@@ -105,6 +166,7 @@ inventory/
 
 - Category → Items (One-to-Many via ObjectId reference)
 - Category deletion cascades to items (items are deleted when category is deleted)
+- Item → Transactions (One-to-Many, optional reference for item-specific transactions)
 
 ## API Endpoints
 
