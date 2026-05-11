@@ -1,24 +1,36 @@
+<div align="center">
+
 # ItemHive
+
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 A inventory management system provides comprehensive inventory tracking, financial management, and dynamic category management.
 
+</div>
+
 ## Features
 
-### 📦 Inventory Management
+### Inventory Management
+
 - **CRUD Operations**: Add, edit, remove, and view inventory items
 - **Item Tracking**: Track item name, category, quantity, and price
 - **Dynamic Categories**: Create and remove custom categories on the fly
 - **Search & Filter**: Search items by name and filter by category
 - **Low Stock Alerts**: Automatic alerts when items fall below threshold
 
-### 💰 Financial Tracking
+### Financial Tracking
+
 - **Income & Expenses**: Track money earned and spent
 - **Net Profit Calculation**: Automatic calculation of net profit
 - **Transaction Management**: Add, view, and delete financial transactions
 - **Toggle Feature**: Enable/disable financial tracking via settings
 - **Price Management**: Adjust item prices and apply discounts
 
-### 📊 Dashboard
+### Dashboard
+
 - **Real-time Statistics**: Total items, categories, low stock alerts
 - **Financial Summary**: Income, expenses, and net profit overview
 - **Interactive Charts**:
@@ -27,18 +39,21 @@ A inventory management system provides comprehensive inventory tracking, financi
   - **Bar Chart**: Sales overview
 - **Real-time Updates**: Dashboard updates automatically when data changes
 
-### ⚙️ Configuration & Settings
+### Configuration & Settings
+
 - **Feature Toggles**: Enable/disable features (e.g., financial tracking)
 - **Low Stock Threshold**: Configure when low stock alerts trigger
 - **Data Export**: Export inventory and financial data to CSV or JSON
 
-### 🎨 User Interface
+### User Interface
+
 - **Responsive Design**: Works on desktop, tablet, and mobile devices
 - **Clean UI**: Modern, intuitive interface built with Tailwind CSS
 - **Forms**: Easy-to-use forms for adding/editing items and categories
 - **Modal Dialogs**: Smooth modal interactions for data entry
 
-### 💾 Data Storage
+### Data Storage
+
 - **MongoDB Database**: NoSQL database for flexible data storage
 - **Mongoose ODM**: Object Data Modeling for MongoDB with TypeScript
 - **Persistent Storage**: All data is saved to the database
@@ -55,12 +70,14 @@ A inventory management system provides comprehensive inventory tracking, financi
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Node.js 18+ and npm
 - Git (optional, for cloning)
 
 ## Installation
 
 1. **Install Dependencies**
+
    ```bash
    npm install
    ```
@@ -72,6 +89,7 @@ Before you begin, ensure you have the following installed:
 
 3. **Set Up Environment Variables**
    Create a `.env` file in the root directory:
+
    ```env
    DATABASE_URL="mongodb://localhost:27017/inventory"
    # Or for MongoDB Atlas:
@@ -81,51 +99,19 @@ Before you begin, ensure you have the following installed:
    ```
 
 4. **Seed Database with Example Data**
+
    ```bash
    npm run db:seed
    ```
 
 5. **Start Development Server**
+
    ```bash
    npm run dev
    ```
 
 6. **Open Browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
-
-## Project Structure
-
-```
-inventory/
-├── app/
-│   ├── api/              # API routes
-│   │   ├── items/        # Item CRUD operations
-│   │   ├── categories/   # Category management
-│   │   ├── transactions/ # Financial transactions
-│   │   ├── dashboard/    # Dashboard statistics
-│   │   ├── settings/     # System settings
-│   │   └── export/       # Data export
-│   ├── inventory/        # Inventory management page
-│   ├── categories/       # Categories management page
-│   ├── transactions/     # Transactions page
-│   ├── settings/         # Settings page
-│   ├── layout.tsx        # Root layout with navigation
-│   ├── page.tsx          # Dashboard page
-│   └── globals.css       # Global styles
-├── lib/
-│   └── mongodb.ts        # MongoDB connection utility
-├── models/               # Mongoose models
-│   ├── User.ts          # User model
-│   ├── Category.ts      # Category model
-│   ├── Item.ts          # Item model
-│   ├── Transaction.ts   # Transaction model
-│   └── Settings.ts      # Settings model
-├── scripts/
-│   └── seed.ts          # Database seeding script
-├── package.json
-├── tsconfig.json
-└── README.md
-```
 
 ## Usage Guide
 
@@ -187,6 +173,7 @@ inventory/
 ### Dashboard
 
 The dashboard provides:
+
 - **Statistics Cards**: Total items, categories, low stock items, net profit
 - **Financial Summary**: Income, expenses, and net profit breakdown
 - **Low Stock Alerts**: List of items below threshold
@@ -225,6 +212,7 @@ The dashboard provides:
 ## API Endpoints
 
 ### Items
+
 - `GET /api/items` - Get all items (with optional search and category filter)
 - `POST /api/items` - Create new item
 - `GET /api/items/[id]` - Get single item
@@ -232,6 +220,7 @@ The dashboard provides:
 - `DELETE /api/items/[id]` - Delete item
 
 ### Categories
+
 - `GET /api/categories` - Get all categories
 - `POST /api/categories` - Create new category
 - `GET /api/categories/[id]` - Get single category
@@ -239,23 +228,28 @@ The dashboard provides:
 - `DELETE /api/categories/[id]` - Delete category
 
 ### Transactions
+
 - `GET /api/transactions` - Get all transactions
 - `POST /api/transactions` - Create new transaction
 - `DELETE /api/transactions/[id]` - Delete transaction
 
 ### Dashboard
+
 - `GET /api/dashboard` - Get dashboard statistics
 
 ### Settings
+
 - `GET /api/settings` - Get all settings
 - `POST /api/settings` - Create/update setting
 
 ### Export
+
 - `GET /api/export?format=csv|json&type=inventory|financial|all` - Export data
 
 ## Example Data
 
 The seed script creates:
+
 - 5 categories: Electronics, Clothing, Food & Beverages, Books, Tools
 - 10 sample items across categories
 - 5 sample transactions
@@ -306,7 +300,7 @@ The seed script creates:
 2. **Database**: Use a production database (PostgreSQL recommended)
 3. **Build**: Run `npm run build`
 4. **Start**: Run `npm start`
-5. **Security**: 
+5. **Security**:
    - Change default passwords
    - Use environment variables for secrets
    - Enable HTTPS
@@ -315,17 +309,20 @@ The seed script creates:
 ## Troubleshooting
 
 ### Database Issues
+
 - Ensure `.env` file exists with `DATABASE_URL`
 - Verify MongoDB is running (for local setup)
 - Check MongoDB connection string format
 - Ensure network access is configured (for MongoDB Atlas)
 
 ### Build Errors
+
 - Clear `.next` folder and rebuild
 - Ensure all dependencies are installed
 - Check TypeScript errors
 
 ### API Errors
+
 - Check browser console for errors
 - Verify API routes are accessible
 - Check database connection
@@ -351,5 +348,4 @@ For issues or questions, please check the code comments or create an issue in th
 
 ---
 
-**ItemHive** - Built with ❤️ using Next.js and TypeScript
-
+**ItemHive** - Built with Next.js and TypeScript
