@@ -58,63 +58,26 @@ A inventory management system provides comprehensive inventory tracking, financi
 - **Mongoose ODM**: Object Data Modeling for MongoDB with TypeScript
 - **Persistent Storage**: All data is saved to the database
 
-## Process Flow
+## System Overview
 
 ```mermaid
 graph TD
     A[User Login] --> B[Dashboard]
     B --> C{Choose Action}
 
-    C -->|Manage Inventory| D[Inventory Page]
-    C -->|Manage Categories| E[Categories Page]
-    C -->|Track Finances| F[Transactions Page]
-    C -->|Configure System| G[Settings Page]
-    C -->|Export Data| H[Export Data]
+    C -->|Manage Inventory| D[Inventory Management]
+    C -->|Manage Categories| E[Category Management]
+    C -->|Track Finances| F[Financial Tracking]
+    C -->|Configure System| G[System Settings]
+    C -->|Export Data| H[Data Export]
 
-    D --> D1[Add Item]
-    D --> D2[Edit Item]
-    D --> D3[Delete Item]
-    D --> D4[Search/Filter Items]
-    D1 --> D5[Select Category]
-    D5 --> D6[Set Price & Quantity]
-    D6 --> D7[Save to Database]
-    D7 --> D8[Update Dashboard Stats]
+    D --> I[Update Dashboard]
+    E --> I
+    F --> I
+    G --> I
+    H --> J[Download Files]
 
-    E --> E1[Create Category]
-    E --> E2[Edit Category]
-    E --> E3[Delete Category]
-    E3 --> E4[Cascade Delete Items]
-    E1 --> E5[Save Category]
-    E5 --> D8
-
-    F --> F1[Add Transaction]
-    F --> F2[View Transaction History]
-    F --> F3[Delete Transaction]
-    F1 --> F4{Transaction Type}
-    F4 -->|Income| F5[Record Income]
-    F4 -->|Expense| F6[Record Expense]
-    F5 --> F7[Update Financial Stats]
-    F6 --> F7
-    F7 --> D8
-
-    G --> G1[Toggle Financial Tracking]
-    G --> G2[Set Low Stock Threshold]
-    G --> G3[Configure Alerts]
-    G1 --> G4[Update Settings]
-    G2 --> G4
-    G3 --> G4
-    G4 --> D8
-
-    H --> H1{Export Format}
-    H1 -->|CSV| H2[Generate CSV]
-    H1 -->|JSON| H3[Generate JSON]
-    H2 --> H4[Download File]
-    H3 --> H4
-
-    D8 --> I[Real-time Dashboard Update]
-    I --> J[Display Charts & Stats]
-    J --> K[Check Low Stock Alerts]
-    K --> L[Update UI Components]
+    I --> B
 ```
 
 ## Quick Start
